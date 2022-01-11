@@ -25,7 +25,7 @@ The function should return a list like this:
 """
 import ipaddress
 
-list_containing_ips_with_range = [ '8.8.4.4', '11.111.1.21-31', '172.21.41.128-172.21.41.132', "192.168.0.1-3" ]
+list_containing_ips_with_range = [ '8.8.4.4', '11.111.1.21-31', '172.20.41.128-172.21.41.132', "192.168.0.1-3" ]
 
 list_containing_full_ips = [ ]
 
@@ -56,8 +56,8 @@ def convert_ranges_to_ip_list(hosts):
                     final_ip = first_ip_except_last_octet + "." + str(k)
                     list_containing_full_ips.append(final_ip)
             elif check_valid_ip_address(last_ip):
-                a = int(first_ip.split(".")[-1])
-                b = int(last_ip.split(".")[-1])
+                a = int(first_ip.split(".") [ -1 ])
+                b = int(last_ip.split(".") [ -1 ])
                 for c in range(a, b + 1):
                     final_ip = first_ip_except_last_octet + "." + str(c)
                     list_containing_full_ips.append(final_ip)
@@ -66,3 +66,29 @@ def convert_ranges_to_ip_list(hosts):
 
 
 print(convert_ranges_to_ip_list(list_containing_ips_with_range))
+
+#    Second method ##
+
+
+# import ipaddress
+#
+# lisaa = [ "1.1.1.2-9", "172.30.30.31-172.30.31.34" ]
+#
+#
+# def convert_ranges_to_ip_list(ip_addresses):
+#     ip_list = [ ]
+#     for ip_address in ip_addresses:
+#         if "-" in ip_address:
+#             start_ip, stop_ip = ip_address.split("-")
+#             if "." not in stop_ip:
+#                 stop_ip = ".".join(start_ip.split(".") [ :-1 ] + [ stop_ip ])
+#             start_ip = ipaddress.ip_address(start_ip)
+#             stop_ip = ipaddress.ip_address(stop_ip)
+#             for ip in range(int(start_ip), int(stop_ip) + 1):
+#                 ip_list.append(str(ipaddress.ip_address(ip)))
+#         else:
+#             ip_list.append(str(ip_address))
+#     return ip_list
+#
+#
+# print(convert_ranges_to_ip_list(lisaa))
