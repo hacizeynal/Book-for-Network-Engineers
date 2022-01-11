@@ -25,7 +25,7 @@ The function should return a list like this:
 """
 import ipaddress
 
-list_containing_ips_with_range = [ '8.8.4.4', '11.111.1.21-31', '172.21.41.128-172.21.41.132' ]
+list_containing_ips_with_range = [ '8.8.4.4', '11.111.1.21-31', '172.21.41.128-172.21.41.132', "192.168.0.1-3" ]
 
 list_containing_full_ips = [ ]
 
@@ -46,15 +46,22 @@ def convert_ranges_to_ip_list(hosts):
             first_ip = each_ip.split("-") [ 0 ]
             first_ip_except_last_octet = first_ip.split(".") [ 0:3 ]
             first_ip_except_last_octet = ".".join(first_ip_except_last_octet)
-            print(first_ip_except_last_octet)
+            # print(first_ip_except_last_octet)
             last_ip = each_ip.split("-") [ -1 ]
             if not check_valid_ip_address(last_ip):
                 last_octet = each_ip.split(".") [ -1 ].split("-")
-                first = int(last_octet [ 0 ])
-                last = int(last_octet [ -1 ])
-                for k in range(first, last + 1):
+                first_index = int(last_octet [ 0 ])
+                last_index = int(last_octet [ -1 ])
+                for k in range(first_index, last_index + 1):
                     final_ip = first_ip_except_last_octet + "." + str(k)
                     list_containing_full_ips.append(final_ip)
+            elif check_valid_ip_address(last_ip):
+                a = int(first_ip.split(".")[-1])
+                b = int(last_ip.split(".")[-1])
+                for c in range(a, b + 1):
+                    final_ip = first_ip_except_last_octet + "." + str(c)
+                    list_containing_full_ips.append(final_ip)
+
     return list_containing_full_ips
 
 
