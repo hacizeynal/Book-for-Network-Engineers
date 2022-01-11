@@ -9,7 +9,6 @@ To check the availability of an IP address, use the ping command.
 Restriction: All tasks must be done using the topics covered in this and previous chapters.
 """
 
-
 import subprocess
 
 list_of_ip_addresses = [ "11.1.1.1", "2.2.2.2", "3.3.33.3", "8.8.8.8", "4.2.2.2", "9.9.9.9", "5.5.5.5", "3.1.1.1" ]
