@@ -25,7 +25,7 @@ The function should return a list like this:
 """
 import ipaddress
 
-list_containing_ips_with_range = [ '8.8.4.4', '11.111.1.1-31', '172.21.41.128-172.21.41.132' ]
+list_containing_ips_with_range = [ '8.8.4.4', '11.111.1.21-31', '172.21.41.128-172.21.41.132' ]
 
 list_containing_full_ips = [ ]
 
@@ -46,6 +46,7 @@ def convert_ranges_to_ip_list(hosts):
             first_ip = each_ip.split("-") [ 0 ]
             first_ip_except_last_octet = first_ip.split(".") [ 0:3 ]
             first_ip_except_last_octet = ".".join(first_ip_except_last_octet)
+            print(first_ip_except_last_octet)
             last_ip = each_ip.split("-") [ -1 ]
             if not check_valid_ip_address(last_ip):
                 last_octet = each_ip.split(".") [ -1 ].split("-")
