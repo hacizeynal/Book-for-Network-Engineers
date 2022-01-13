@@ -51,5 +51,5 @@ def parse_cdp_neighbors(command_output):
 
 
 if __name__ == "__main__":
-    with open("show_cdp_n_r1.txt") as f:
+    with open("show_cdp_n_sw1.txt") as f:
         print(parse_cdp_neighbors(f.read()))
