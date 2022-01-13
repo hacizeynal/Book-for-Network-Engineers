@@ -15,7 +15,7 @@ Reachable    Unreachable
 
 from tabulate import tabulate
 
-unreachable = [ '11.1.1.1', '2.2.2.2', '3.3.33.3', '5.5.5.5', '3.1.1.1' ]
+unreachable = [ '11.1.1.1', '2.2.2.2', '3.3.33.3', '4.5.5.5', '3.1.1.1' ]
 reachable = [ '8.8.8.8', '4.2.2.2', '9.9.9.9' ]
 
 
@@ -30,4 +30,5 @@ def print_ip_table(a, b):
     # return tabulate(merged_dic, headers="keys", tablefmt="grid")
 
 
-print(print_ip_table(unreachable, reachable))
+if __name__ == "__main__":
+    print(print_ip_table(unreachable, reachable))
