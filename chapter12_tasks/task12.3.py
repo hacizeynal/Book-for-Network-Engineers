@@ -27,6 +27,7 @@ def print_ip_table(a, b):
     b.update(c)
     print(b)
     return tabulate(b, headers="keys", tablefmt="grid")
+    # return tabulate(merged_dic, headers="keys", tablefmt="grid")
 
 
 print(print_ip_table(unreachable, reachable))
