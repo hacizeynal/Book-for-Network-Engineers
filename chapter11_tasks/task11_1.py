@@ -40,6 +40,7 @@ def parse_cdp_neighbors(command_output):
 
     for line in command_output.split("\n"):
         line = line.rstrip().strip()
+        print(line)
         like_column = line.split()
         if ">" in line:
             hostname = line.split(">") [ 0 ]
