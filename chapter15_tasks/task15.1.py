@@ -21,7 +21,7 @@ import re
 from pprint import pprint
 
 result = [ ]
-regex = ("ip address (\d{1,3}\.\d{1,3}\.\d{1,3}.\d{1,3}) (\d{1,3}\.\d{1,3}\d{1,3}\.\d{1,3}\.\d{1,3})")
+regex = "ip address (\S+) (\S+)"
 
 
 def get_ip_from_cfg(device_config):
