@@ -33,4 +33,4 @@ def get_ip_from_cfg(device_config):
     return result
 
 
-print(get_ip_from_cfg("config_r1.txt"))
+pprint(get_ip_from_cfg("config_r1.txt"))
