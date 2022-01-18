@@ -17,5 +17,21 @@ Please note that in this case, you can not check the correctness of the IP addre
 since the command output from network device is processed, not user input.
 
 """
+import re
+from pprint import pprint
 
-def get_ip_from_cfg(device_configuration):
+result = [ ]
+
+
+def get_ip_from_cfg(device_config):
+    regex = (r"ip address (\w+\.\w+\.\w+\.\w) (\d+\.\d+\.\d+\.\d+)")
+    with open(device_config) as f:
+        for line in f:
+            print(line)
+            match_ip = re.match(regex, line)
+            if match_ip:
+                result.append(match_ip.groups())
+    return result
+
+
+print(get_ip_from_cfg("config_r1.txt"))

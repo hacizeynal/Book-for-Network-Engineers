@@ -51,7 +51,7 @@ def convert_ranges_to_ip_list(hosts):
             if not check_valid_ip_address(last_ip):
                 last_octet = each_ip.split(".") [ -1 ].split("-")
                 first_index = int(last_octet [ 0 ])
-                last_index = int(last_octet [ -1 ])
+                l   ast_index = int(last_octet [ -1 ])
                 for k in range(first_index, last_index + 1):
                     final_ip = first_ip_except_last_octet + "." + str(k)
                     list_containing_full_ips.append(final_ip)
