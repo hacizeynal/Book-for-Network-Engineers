@@ -18,3 +18,4 @@ since the command output from network device is processed, not user input.
 
 """
 
+def get_ip_from_cfg(device_configuration):
