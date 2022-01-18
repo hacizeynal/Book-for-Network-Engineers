@@ -16,3 +16,13 @@ Please note that in this case, you can not check the correctness
 of the IP address, address ranges, and so on, since the command
 output from network device is processed, not user input.
 """
+
+result_dictionary = {}
+regex = "ip address (\S+) (\S+)"
+
+
+def get_ip_from_cfg(device_config):
+    with open(device_config) as k:
+        for line in k:
+            print(line)
+    return result_dictionary

@@ -28,8 +28,8 @@ def get_ip_from_cfg(device_config):
     with open(device_config) as f:
         for line in f:
             match_ip = re.search(regex, line)
-            match_ip1 = re.finditer(regex, line)
-            print(match_ip1)
+            # match_ip1 = re.finditer(regex, line)
+            # print(match_ip1)
             if match_ip:
                 result.append(match_ip.groups())
     return result
