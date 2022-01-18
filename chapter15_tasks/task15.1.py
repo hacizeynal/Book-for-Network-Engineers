@@ -21,14 +21,13 @@ import re
 from pprint import pprint
 
 result = [ ]
+regex = ("ip address (\d{1,3}\.\d{1,3}\.\d{1,3}.\d{1,3}) (\d{1,3}\.\d{1,3}\d{1,3}\.\d{1,3}\.\d{1,3})")
 
 
 def get_ip_from_cfg(device_config):
-    regex = (r"ip address (\w+\.\w+\.\w+\.\w) (\d+\.\d+\.\d+\.\d+)")
     with open(device_config) as f:
         for line in f:
-            print(line)
-            match_ip = re.match(regex, line)
+            match_ip = re.search(regex, line)
             if match_ip:
                 result.append(match_ip.groups())
     return result
