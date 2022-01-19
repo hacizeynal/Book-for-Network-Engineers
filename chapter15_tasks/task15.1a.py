@@ -21,7 +21,7 @@ output from network device is processed, not user input.
 """
 
 result_dictionary = {}
-regex = r"ip address (\S+) (\S+)"
+regex = (r"ip address (\S+) (\S+)")
 
 
 def get_ip_from_cfg(device_config):
