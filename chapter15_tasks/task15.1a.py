@@ -1,3 +1,6 @@
+import re
+from pprint import pprint
+
 """
 Task 15.1a
 Copy the get_ip_from_cfg function from task 15.1 and redesign it so
@@ -18,11 +21,20 @@ output from network device is processed, not user input.
 """
 
 result_dictionary = {}
-regex = "ip address (\S+) (\S+)"
+regex = r"ip address (\S+) (\S+)"
 
 
 def get_ip_from_cfg(device_config):
     with open(device_config) as k:
         for line in k:
-            print(line)
+            match_ip = re.search(regex, line)
+            if line.startswith("Interface") or line.startswith("interface"):
+                interface_id = line.split(" ") [ -1 ]
+            elif match_ip:
+                ip_address = match_ip.groups()
+                result_dictionary[interface_id]=ip_address
+
     return result_dictionary
+
+
+pprint(get_ip_from_cfg("config_r1.txt"))
