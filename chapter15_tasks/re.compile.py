@@ -1,7 +1,7 @@
 import re
 
 # Target String one
-str1 = "Emma's luck numbers are 251 761 231 451"
+str1 = "Java's luck numbers are 251 761 231 451"
 
 # pattern to find three consecutive digits
 string_pattern = r"\d{3}"
@@ -13,9 +13,6 @@ regex_pattern = re.compile(string_pattern)
 print(type(regex_pattern))
 
 # find all the matches in string one
-
-
-print(result)
 
 # Target String two
 
@@ -31,3 +28,10 @@ print(result3)
 for k in result5:
     print(k.group())
 
+comp = re.compile("[Jj]ava")
+
+re_object = comp.search(str1)
+re_object2 = comp.match(str1)
+
+print(re_object.group())
+print(re_object2.group())
