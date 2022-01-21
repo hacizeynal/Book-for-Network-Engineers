@@ -21,11 +21,6 @@ output from network device is processed, not user input.
 """
 
 result_dictionary = {}
-regex_for_ip_address_interface = r"interface (?P<intf>\S+)\n" \
-                                 r"( .*\n)*"\
-                                 r" ip address (?P<ip>\S+) (?P<mask>\S+)"
-
-regex_pattern = re.compile(regex_for_ip_address_interface)
 
 # def get_ip_from_cfg(device_config):
 #     with open(device_config) as k:
@@ -45,15 +40,36 @@ regex_pattern = re.compile(regex_for_ip_address_interface)
 Second version
 
 """
-result_dictionary = {}
+
+regex_for_ip_address_interface = r"interface (?P<intf>\S+)\n" \
+                                 r"( .*\n)*" \
+                                 r" ip address (?P<ip>\S+) (?P<mask>\S+)"
+
+regex_pattern = re.compile(regex_for_ip_address_interface)
 
 
 def get_ip_from_cfg2(device_config):
     with open(device_config) as m:
         find_match = regex_pattern.finditer(m.read())
-        if find_match:
-            for k in find_match:
-                print(k.groups())
+        for k in find_match:
+            result_dictionary [ k.group("intf") ] = k.group("ip", "mask")
+    return result_dictionary
 
 
-get_ip_from_cfg2("config_r1.txt")
+# pprint(get_ip_from_cfg2("config_r1.txt"))
+
+"""
+
+Third version
+
+"""
+
+
+def get_ip_from_cfg3(device_config):
+    with open(device_config) as m:
+        find_match = regex_pattern.finditer(m.read())
+        dictionary = {i.group("intf"): i.group("ip", "mask") for i in find_match}
+    return dictionary
+
+
+pprint(get_ip_from_cfg3('config_r11.txt'))
