@@ -14,13 +14,14 @@ print(type(regex_pattern))
 
 # find all the matches in string one
 
-result = regex_pattern.findall(str1)
+
 print(result)
 
 # Target String two
 
 str2 = "Kelly's luck numbers are 111 212 415"
 
+result = regex_pattern.findall(str1)
 result2 = regex_pattern.findall(str2)
 result3 = regex_pattern.match(str2)
 result4 = regex_pattern.search(str2)
