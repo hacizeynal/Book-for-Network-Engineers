@@ -19,5 +19,9 @@ of the IP address, address ranges, and so on, since the command
 output from network device is processed, not user input.
 """
 
-def get_ip_from_cfg():
+import re
+from pprint import pprint
 
+
+def get_ip_from_cfg(config_device):
+    open(config_device) as router_config:

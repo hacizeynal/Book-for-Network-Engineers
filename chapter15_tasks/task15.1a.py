@@ -72,4 +72,4 @@ def get_ip_from_cfg3(device_config):
     return dictionary
 
 
-pprint(get_ip_from_cfg3('config_r11.txt'))
+pprint(get_ip_from_cfg3('config_r2.txt'))
