@@ -22,6 +22,12 @@ output from network device is processed, not user input.
 import re
 from pprint import pprint
 
+regex_for_ip_address_interface = r"interface (?P<intf>\S+)\n" \
+                                 r"( .*\n)*" \
+                                 r" ip address (?P<ip>\S+) (?P<mask>\S+)"
+
+regex_pattern = re.compile(regex_for_ip_address_interface)
+
 
 def get_ip_from_cfg(config_device):
     open(config_device) as router_config:
