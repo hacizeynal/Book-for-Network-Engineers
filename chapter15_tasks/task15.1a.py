@@ -22,6 +22,12 @@ output from network device is processed, not user input.
 
 result_dictionary = {}
 
+regex_for_ip_address_interface = r"interface (?P<intf>\S+)\n" \
+                                 r"( .*\n)*" \
+                                 r" ip address (?P<ip>\S+) (?P<mask>\S+)"
+
+regex_pattern = re.compile(regex_for_ip_address_interface)
+
 # def get_ip_from_cfg(device_config):
 #     with open(device_config) as k:
 #         for line in k:
@@ -30,9 +36,11 @@ result_dictionary = {}
 #                 interface_id = line.split(" ") [ -1 ]
 #             elif match_ip:
 #                 ip_address = match_ip.groups()
-#                 result_dictionary[interface_id]=ip_address
+#                 result_dictionary [ interface_id ] = ip_address
 #
 #     return result_dictionary
+
+
 # pprint(get_ip_from_cfg("config_r1.txt"))
 
 """
@@ -41,17 +49,13 @@ Second version
 
 """
 
-regex_for_ip_address_interface = r"interface (?P<intf>\S+)\n" \
-                                 r"( .*\n)*" \
-                                 r" ip address (?P<ip>\S+) (?P<mask>\S+)"
-
-regex_pattern = re.compile(regex_for_ip_address_interface)
-
 
 def get_ip_from_cfg2(device_config):
     with open(device_config) as m:
         find_match = regex_pattern.finditer(m.read())
+        # print(find_match)
         for k in find_match:
+            # print(k.group("ip","mask"))
             result_dictionary [ k.group("intf") ] = k.group("ip", "mask")
     return result_dictionary
 
