@@ -16,3 +16,5 @@ To get this result, use regular expressions.
 Check the operation of the function using the example of the sh_ip_int_br.txt file.
 
 """
+
+def parse_sh_ip_int_br():
