@@ -24,14 +24,21 @@ from pprint import pprint
 
 result_dict = {}
 
-regex = (r"^interface (?P<intf>\S+)"
-         r"|address (?P<ip>\S+) (?P<mask>\S+)")
-
-regex_pattern = re.compile(regex)
 
 def get_ip_from_cfg(config_device):
-    open(config_device) as router_config:
+    with open(config_device) as f:
+        regex_match = re.finditer("interface (\S+)\n"
+                                  "(?: .*\n)*"
+                                  " ip address \S+ \S+\n"
+                                  "( ip address \S+ \S+ secondary\n)*",
+                                  f.read())
+        # print(type(regex_match))
+        # print(regex_match)
+        for i in regex_match:
+            # print(i.group())
+            # print(type(i.group()))
+            result_dict [ i.group(1) ] = re.findall("ip address (\S+) (\S+)", i.group())
+    return result_dict
+
 
 pprint(get_ip_from_cfg("config_r2.txt"))
-
-
