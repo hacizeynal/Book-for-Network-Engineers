@@ -17,4 +17,10 @@ Check the operation of the function using the example of the sh_ip_int_br.txt fi
 
 """
 
-def parse_sh_ip_int_br():
+
+def parse_sh_ip_int_br(interface_details):
+    with open("show_ip_int_br.txt") as k:
+        print(k.read())
+
+
+print(parse_sh_ip_int_br("show_ip_int_br.txt"))
