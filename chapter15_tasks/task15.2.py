@@ -16,11 +16,18 @@ To get this result, use regular expressions.
 Check the operation of the function using the example of the sh_ip_int_br.txt file.
 
 """
+import re
+from pprint import pprint
+zeynal_list = [ ]
 
 
 def parse_sh_ip_int_br(interface_details):
     with open("show_ip_int_br.txt") as k:
-        print(k.read())
+        match_regex = re.finditer("(?P<interface>\S+)\s+(?P<address>\S+)\s+\w+\s+\w+\s+("
+                                  "?P<status>up|administratively down)\s+(?P<protocol>up|down)", k.read())
+        for i in match_regex:
+            zeynal_list.append(i.groups())
+    return zeynal_list
 
 
-print(parse_sh_ip_int_br("show_ip_int_br.txt"))
+pprint(parse_sh_ip_int_br("show_ip_int_br.txt"))
