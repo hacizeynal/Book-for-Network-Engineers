@@ -22,7 +22,7 @@ zeynal_list = [ ]
 
 
 def parse_sh_ip_int_br(interface_details):
-    with open("show_ip_int_br.txt") as k:
+    with open(interface_details) as k:
         match_regex = re.finditer("(?P<interface>\S+)\s+(?P<address>\S+)\s+\w+\s+\w+\s+("
                                   "?P<status>up|administratively down)\s+(?P<protocol>up|down)", k.read())
         for i in match_regex:
