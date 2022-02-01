@@ -15,3 +15,14 @@ interface Loopback0
  ip address 10.1.1.1 255.255.255.255
 Check the operation of the function using the example of the config_r1.txt file.
 """
+import re
+from pprint import pprint
+
+
+def get_ints_without_description(configuration_of_router):
+    with open(configuration_of_router) as bahlul_config:
+        for line in bahlul_config:
+            print(line.rstrip())
+
+
+pprint(get_ints_without_description("config_r1.txt"))
