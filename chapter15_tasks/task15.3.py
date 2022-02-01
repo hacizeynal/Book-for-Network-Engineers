@@ -23,5 +23,28 @@ In the file with the rules for the ASA:
 - there must be one space before the rest of the lines
 In all rules for ASA, the interfaces will be the same (inside, outside).
 """
+import re
+from pprint import pprint
 
-def convert_ios_nat_to_asa():
+final_config = """
+object network LOCAL_{IP}
+ host {IP}
+ nat (inside,outside) static interface service tcp {source_port} {dest_port}
+"""
+zeynal = "I love you "
+
+
+def convert_ios_nat_to_asa(nat_config_file, real_configuration):
+    with open(nat_config_file, "r") as source_config, open(real_configuration, "w") as destination_config:
+        for b in source_config:
+            match_regex = re.search("(?P<IP>\d+.\.\d+\.\d+\.\d+) (?P<source_port>\d+)(?:.*) (?P<dest_port>\d+)",
+                                    b)
+            k = match_regex.groupdict()
+            print(k)
+            # ** will be used for dictionary unpacking ,values will be replaced with formatting method.
+            # **kwargs is called packing of dict
+            destination_config.write(final_config.format(**k))
+    return zeynal
+
+
+pprint(convert_ios_nat_to_asa("cisco_nat_config.txt", "real_configuration.txt"))

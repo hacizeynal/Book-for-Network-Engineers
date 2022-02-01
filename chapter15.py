@@ -49,8 +49,8 @@ result = re.finditer(r'(\S+) +'
 
 for mat in result:
     groups.append(mat.groups())
-
-print(groups)
+# print(groups)
 
 mac_address_table = open("show_mac_address.txt").read()
 
+num_dict = {"k": '3', "i": '90', "p": '900'}
