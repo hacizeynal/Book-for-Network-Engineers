@@ -31,7 +31,7 @@ object network LOCAL_{IP}
  host {IP}
  nat (inside,outside) static interface service tcp {source_port} {dest_port}
 """
-zeynal = "I love you "
+zeynal = "I love you <3  "
 
 
 def convert_ios_nat_to_asa(nat_config_file, real_configuration):
