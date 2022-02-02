@@ -20,9 +20,12 @@ from pprint import pprint
 
 
 def get_ints_without_description(configuration_of_router):
-    with open(configuration_of_router) as bahlul_config:
-        for line in bahlul_config:
-            print(line.rstrip())
+    general_regex = re.compile(r"!\ninterface (?P<intf>\S+)\n"
+                               r"(?P<descr> description \S+)?")
+    with open(configuration_of_router) as router_output:
+        catch = general_regex.finditer(router_output.read())
+        result = [ i.group(1) for i in catch if i.lastgroup != "descr" ]
+        return result
 
 
 pprint(get_ints_without_description("config_r1.txt"))
