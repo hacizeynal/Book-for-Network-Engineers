@@ -18,3 +18,15 @@ of the interface:
 'Eth 0/0': 'description Connected to SW1 port Eth 0/1'
 Check the operation of the function on the sh_cdp_n_sw1.txt file.
 """
+
+import re
+from pprint import pprint
+
+
+def generate_description_from_cdp(config_file):
+    with open(config_file) as raw_data:
+        for i in raw_data:
+            print(i.rstrip())
+
+
+pprint(generate_description_from_cdp("show_cdp.txt"))

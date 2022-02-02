@@ -54,6 +54,9 @@ result = [ ]
 def get_ip_from_cfg(device_config):
     regex = r"ip address (\S+) (\S+)"
     with open(device_config) as k:
+        a = re.finditer(regex,k.read())
+        for i in a:
+            print(i.groups())
         result_list = [ j.groups() for j in re.finditer(regex, k.read()) ]
     return result_list
 
