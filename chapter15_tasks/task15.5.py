@@ -22,11 +22,19 @@ Check the operation of the function on the sh_cdp_n_sw1.txt file.
 import re
 from pprint import pprint
 
+full_regex = re.compile(
+    "(?P<remote_device>\w+) +(?P<local_interface>\S+ \S+) +\d+ +[\w ]+  +\S+ +(?P<remote_interface>\S+ \S+)")
+
+final_config = """ {local_interface} : 'description Connected to {remote_device} port {remote_interface}} """
+
+a = {}
+
 
 def generate_description_from_cdp(config_file):
     with open(config_file) as raw_data:
-        for i in raw_data:
-            print(i.rstrip())
+        catch = full_regex.finditer(raw_data.read())
+        for i in catch:
+            print(i.groups())
 
 
 pprint(generate_description_from_cdp("show_cdp.txt"))
