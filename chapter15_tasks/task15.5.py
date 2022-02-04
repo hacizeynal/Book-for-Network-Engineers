@@ -26,6 +26,7 @@ full_regex = re.compile(
     "(?P<remote_device>\w+) +(?P<local_interface>\S+ \S+) +\d+ +[\w ]+  +\S+ +(?P<remote_interface>\S+ \S+)")
 
 final_config = """ {local_interface} : 'description Connected to {remote_device} port {remote_interface} """
+final_dictionary = {}
 
 
 def generate_description_from_cdp(config_file):
@@ -34,9 +35,8 @@ def generate_description_from_cdp(config_file):
         for i in catch:
             k = i.groupdict()
             print(k)
-            # ** will be used for dictionary unpacking ,values will be replaced with formatting method.
-            # **kwargs is called packing of dict
-    return destination_config.write(final_config.format(**k))
+            final_dictionary[i.group(1)] = []
+    return final_dictionary
 
 
 pprint(generate_description_from_cdp("show_cdp.txt"))
