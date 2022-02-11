@@ -38,8 +38,9 @@ def generate_description_from_cdp(config_file):
             # print(k)
             # create Dictionary based on exact matched patterns ,keys will be group names such as (remote_device,
             # local_interface and etc)
-            final_dictionary [ i.group(2) ] = final_config.format(**k) # Dictionary unpacking
+            final_dictionary [ i.group(2) ] = final_config.format(**k)  # Dictionary unpacking
     return final_dictionary
 
 
-pprint(generate_description_from_cdp("show_cdp.txt"))
+if __name__ == "__main__":
+    pprint(generate_description_from_cdp("show_cdp.txt"))
