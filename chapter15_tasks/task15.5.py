@@ -25,17 +25,17 @@ from pprint import pprint
 full_regex = re.compile(
     "(?P<remote_device>\w+) +(?P<local_interface>\S+ \S+) +\d+ +[\w ]+  +\S+ +(?P<remote_interface>\S+ \S+)")
 
-final_config = """ {local_interface} : 'description Connected to {remote_device} port {remote_interface} """
+final_config = """description Connected to {remote_device} port {remote_interface}"""
+
 final_dictionary = {}
 
 
 def generate_description_from_cdp(config_file):
-    with open(config_file) as raw_data, open("real_configuration3.txt", "w") as destination_config:
+    with open(config_file) as raw_data:
         catch = full_regex.finditer(raw_data.read())
         for i in catch:
             k = i.groupdict()
-            print(k)
-            final_dictionary[i.group(1)] = []
+            final_dictionary [ i.group(2) ] = final_config.format(**k)
     return final_dictionary
 
 
