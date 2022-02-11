@@ -35,7 +35,10 @@ def generate_description_from_cdp(config_file):
         catch = full_regex.finditer(raw_data.read())
         for i in catch:
             k = i.groupdict()
-            final_dictionary [ i.group(2) ] = final_config.format(**k)
+            print(k)
+            # create Dictionary based on exact matched patterns ,keys will be group names such as (remote_device,
+            # local_interface and etc)
+            final_dictionary [ i.group(2) ] = final_config.format(**k) # Dictionary unpacking
     return final_dictionary
 
 
