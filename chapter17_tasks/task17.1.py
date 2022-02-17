@@ -1,3 +1,6 @@
+import csv
+import re
+
 """
 
 Create the write_dhcp_snooping_to_csv function, which processes the output of the show dhcp snooping binding command
@@ -18,8 +21,11 @@ MacAddress          IpAddress        Lease(sec)  Type           VLAN  Interface
 Total number of bindings: 2
 The resulting csv file should contain the following content:
 
-switch,mac,ip,vlan,interface sw3,00:E9:BC:3F:A6:50,100.1.1.6,3,FastEthernet0/20 sw3,00:E9:22:11:A6:50,100.1.1.7,3,
-FastEthernet0/21 The first column in the csv file, the name of the switch, must be obtained from the file name,
+switch,mac,ip,vlan,interface 
+sw3,00:E9:BC:3F:A6:50,100.1.1.6,3,FastEthernet0/20 
+sw3,00:E9:22:11:A6:50,100.1.1.7,3,FastEthernet0/21 
+
+The first column in the csv file, the name of the switch, must be obtained from the file name,
 the rest - from the contents in the files.
 
 Check the function on the contents of the files sw1_dhcp_snooping.txt, sw2_dhcp_snooping.txt, sw3_dhcp_snooping.txt.
@@ -27,4 +33,15 @@ Check the function on the contents of the files sw1_dhcp_snooping.txt, sw2_dhcp_
 
 
 """
+regex = re.compile("(?P<mac>\S+) +(?P<ip>\S+) +\d+ +\S+ +(?P<vlan>\d+) +(?P<interface>\S+)")
 
+
+def write_dhcp_snooping_to_csv(configfile_from_device, csv_output):
+    with open(configfile_from_device) as k:
+        catch_from_file = regex.finditer(k.read())
+        for i in catch_from_file:
+            print(i.groups())
+
+
+if __name__ == "__main__":
+    print(write_dhcp_snooping_to_csv("dhcp_snooping_sw1.txt", "sw1_dhcp_snooping.csv"))
