@@ -45,6 +45,7 @@ def write_dhcp_snooping_to_csv(configfile_from_device, csv_output):
         hostname = re.search("dhcp_snooping_([^/]+).txt", configfile_from_device)  # grab hostname from filename
         hostname = hostname.group(1)
         for i in catch_from_file:
+            print((hostname,)+i)
             write_data.writerow((hostname,) + i)
 
 
