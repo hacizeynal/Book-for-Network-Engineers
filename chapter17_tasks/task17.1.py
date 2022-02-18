@@ -46,7 +46,8 @@ def write_dhcp_snooping_to_csv(configfile_from_device, csv_output):
         hostname = hostname.group(1)  # this will give exact hostname ,otherwise it is match object
         for i in catch_from_file:
             print((hostname,) + i)
-            write_data.writerow((hostname,) + i)
+            write_data.writerow((hostname,) + i)  # concatenate tuple to tuple
+            print(type(hostname))
 
 
 if __name__ == "__main__":
