@@ -38,16 +38,16 @@ regex = re.compile("(?P<mac>\S+) +(?P<ip>\S+) +\d+ +\S+ +(?P<vlan>\d+) +(?P<inte
 
 def write_dhcp_snooping_to_csv(configfile_from_device, csv_output):
     with open(configfile_from_device) as k:
-        catch_from_file = regex.findall(k.read())
+        catch_from_file = regex.findall(k.read())  # find all patterns and collect them to the list of tuples
     with open(csv_output, "w") as m:
         write_data = csv.writer(m)
-        write_data.writerow([ "switch", "mac", "ip", "vlan", "interface" ])
+        write_data.writerow([ "switch", "mac", "ip", "vlan", "interface" ])  # add those headers to the csv
         hostname = re.search("dhcp_snooping_([^/]+).txt", configfile_from_device)  # grab hostname from filename
-        hostname = hostname.group(1)
+        hostname = hostname.group(1)  # this will give exact hostname ,otherwise it is match object
         for i in catch_from_file:
-            print((hostname,)+i)
+            print((hostname,) + i)
             write_data.writerow((hostname,) + i)
 
 
 if __name__ == "__main__":
-    print(write_dhcp_snooping_to_csv("dhcp_snooping_sw1.txt", "sw1_dhcp_snooping.csv"))
+    print(write_dhcp_snooping_to_csv("dhcp_snooping_sw3.txt", "sw3_dhcp_snooping.csv"))
