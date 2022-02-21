@@ -31,11 +31,23 @@ The code below has created a list of files using the glob module.
 You can uncomment the print(sh_version_files) line to see the content of the list.
 In addition, a list of headers has been created, which should be written to CSV.
 """
+import re
+
+# import glob
+# import csv
+
+regex_pattern = re.compile(r'Cisco IOS .*? Version (?P<ios>\S+), .*'
+                           r'uptime is (?P<uptime>[\S ]+).*'
+                           r'image file is "(?P<image>\S+).*')
 
 
 def parse_sh_version(show_version):
-    with open(show_version) as k:
-        print(k.read())
+    with open(show_version) as a:
+        find_groups = regex_pattern.search(a.read(), re.DOTALL)
+        if find_groups is True:
+            return find_groups.group()
+        else:
+            return "Nothing matched with this Regex"
 
 
-parse_sh_version("show_version_r1.txt")
+print(parse_sh_version("show_version_r1.txt"))

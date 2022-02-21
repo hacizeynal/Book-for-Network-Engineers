@@ -18,5 +18,5 @@ if match:
 else:
     print("pattern not found")
 
-# Search will try to find 1st match ,next outputs are ignored.
+# Search will try to find 1st pattern ,next outputs are ignored.
 
