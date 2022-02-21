@@ -32,21 +32,32 @@ You can uncomment the print(sh_version_files) line to see the content of the lis
 In addition, a list of headers has been created, which should be written to CSV.
 """
 import re
+import csv
 
 # import glob
-# import csv
+
 
 regex_pattern = (r'Cisco IOS .*? Version (?P<ios>\S+), .*'
                  r'uptime is (?P<uptime>[\S ]+).*'
                  r'image file is "(?P<image>\S+).*')
 
-regex_pattern2 = r'Cisco IOS .*? Version (?P<ios>\S+), .*'
-
 
 def parse_sh_version(show_version):
     with open(show_version) as m:
-        find_groups = re.search(regex_pattern, m.read(), re.DOTALL, )
-        return find_groups.groups()
+        find_matches = re.search(regex_pattern, m.read(), re.DOTALL, )  # DOTALL will be used to new line character as
+        # well.
+        return find_matches.groups()
 
 
-print(parse_sh_version("show_version_r1.txt"))
+def write_inventory_to_csv(data_filenames, csv_output):
+    with open(csv_output, "w") as m:
+        write_data = csv.writer(m)
+        write_data.writerow([ "hostname", "ios", "image", "uptime"])  # add those headers to the csv
+        # hostname = re.search("dhcp_snooping_([^/]+).txt", data_filenames)  # grab hostname from filename
+
+
+
+
+
+
+# print(parse_sh_version("show_version_r1.txt"))
