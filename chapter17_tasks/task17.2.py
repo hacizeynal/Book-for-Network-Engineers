@@ -36,18 +36,17 @@ import re
 # import glob
 # import csv
 
-regex_pattern = re.compile(r'Cisco IOS .*? Version (?P<ios>\S+), .*'
-                           r'uptime is (?P<uptime>[\S ]+).*'
-                           r'image file is "(?P<image>\S+).*')
+regex_pattern = (r'Cisco IOS .*? Version (?P<ios>\S+), .*'
+                 r'uptime is (?P<uptime>[\S ]+).*'
+                 r'image file is "(?P<image>\S+).*')
+
+regex_pattern2 = r'Cisco IOS .*? Version (?P<ios>\S+), .*'
 
 
 def parse_sh_version(show_version):
-    with open(show_version) as a:
-        find_groups = regex_pattern.search(a.read(), re.DOTALL)
-        if find_groups is True:
-            return find_groups.group()
-        else:
-            return "Nothing matched with this Regex"
+    with open(show_version) as m:
+        find_groups = re.search(regex_pattern, m.read(), re.DOTALL, )
+        return find_groups.groups()
 
 
 print(parse_sh_version("show_version_r1.txt"))
