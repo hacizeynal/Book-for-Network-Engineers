@@ -33,9 +33,7 @@ In addition, a list of headers has been created, which should be written to CSV.
 """
 import re
 import csv
-
-# import glob
-
+import glob
 
 regex_pattern = (r'Cisco IOS .*? Version (?P<ios>\S+), .*'
                  r'uptime is (?P<uptime>[\S ]+).*'
@@ -43,27 +41,31 @@ regex_pattern = (r'Cisco IOS .*? Version (?P<ios>\S+), .*'
 
 
 def parse_sh_version(show_version):
-    with open(show_version) as m:
-        find_matches = re.search(regex_pattern, m.read(), re.DOTALL, )  # DOTALL will be used to new line character as
+    with open(show_version) as a:
+        find_matches = re.search(regex_pattern, a.read(), re.DOTALL, )  # DOTALL will be used to new line character as
         # well.
         return find_matches.groups()
 
 
-print(parse_sh_version("show_version_r3.txt"))
-
-data_filenames = [ "show_version_r1.txt", "show_version_r2.txt", "show_version_r3.txt" ]
+# print(parse_sh_version("show_version_r1.txt"))
 
 
 def write_inventory_to_csv(data_filenames, csv_output):
     with open(csv_output, "w") as m:
-        write_data = csv.writer(m)
-        write_data.writerow([ "hostname", "ios", "image", "uptime" ])  # add those headers to the csv
-        for i in data_filenames:
-            hostname = re.search(r"show_version_([\S ]+).txt", i)  # grab hostname from filename
-            hostname = hostname.group(1)
-        write_data.writerow((hostname,) + parse_sh_version(i))  # concatenate tuple to tuple ,we are calling first
-        # function to get regex match
+        write_to_csv_data = csv.writer(m)
+        write_to_csv_data.writerow([ "hostname", "ios", "image", "uptime" ])  # add those headers to the csv
+        for device_output in data_filenames:
+            hostname = re.search(r"show_version_([\S ]+).txt", device_output).group(1)  # grab hostname from filename
+            # and take it
+            # with group()
+            with open(device_output) as k:
+                grab_data_from_output = parse_sh_version(k.read())  # call first function to grab data ( expected
+                # result is tuple of elements)
+                if grab_data_from_output:
+                    write_to_csv_data.writerow((hostname,) + parse_sh_version(device_output))  # concatenate tuple to
+                    # tuple ,we are calling first function to get regex match
 
 
 if __name__ == "__main__":
-    write_inventory_to_csv(data_filenames, "router_inventory.csv")
+    sh_version_files = glob.glob("show_vers*")
+    print(write_inventory_to_csv(sh_version_files, "router_inventory.csv"))
