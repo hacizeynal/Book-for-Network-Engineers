@@ -49,15 +49,21 @@ def parse_sh_version(show_version):
         return find_matches.groups()
 
 
+print(parse_sh_version("show_version_r3.txt"))
+
+data_filenames = [ "show_version_r1.txt", "show_version_r2.txt", "show_version_r3.txt" ]
+
+
 def write_inventory_to_csv(data_filenames, csv_output):
     with open(csv_output, "w") as m:
         write_data = csv.writer(m)
-        write_data.writerow([ "hostname", "ios", "image", "uptime"])  # add those headers to the csv
-        # hostname = re.search("dhcp_snooping_([^/]+).txt", data_filenames)  # grab hostname from filename
+        write_data.writerow([ "hostname", "ios", "image", "uptime" ])  # add those headers to the csv
+        for i in data_filenames:
+            hostname = re.search(r"show_version_([\S ]+).txt", i)  # grab hostname from filename
+            hostname = hostname.group(1)
+        write_data.writerow((hostname,) + parse_sh_version(i))  # concatenate tuple to tuple ,we are calling first
+        # function to get regex match
 
 
-
-
-
-
-# print(parse_sh_version("show_version_r1.txt"))
+if __name__ == "__main__":
+    write_inventory_to_csv(data_filenames, "router_inventory.csv")
