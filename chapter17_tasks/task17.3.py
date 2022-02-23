@@ -37,9 +37,9 @@ def parse_sh_cdp_neighbors(cdp_neighbor_txt):
                 hostname = hostname_match.group("hostname")
                 final_dictionary [ hostname ] = {}
             elif details_match:
-                remote_device = details_match.group("remote_device")
-                local_interface = details_match.group("local_interface")
-                remote_interface = details_match.group("remote_interface")
+                remote_interface, remote_device, local_interface = details_match.group("remote_interface",
+                                                                                       "remote_device",
+                                                                                       "local_interface")
                 final_dictionary [ hostname ] [ local_interface ] = {remote_device: remote_interface}
         return final_dictionary
 
