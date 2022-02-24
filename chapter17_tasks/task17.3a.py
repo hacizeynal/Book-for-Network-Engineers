@@ -28,3 +28,5 @@ Check the operation of the save_to_filename parameter and write the resulting
 dictionary to the topology.yaml file. You will need it in the next task.
 """
 
+def generate_topology_from_cdp():
+

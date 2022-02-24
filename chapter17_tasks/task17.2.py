@@ -56,11 +56,13 @@ def write_inventory_to_csv(data_filenames, csv_output):
         write_to_csv_data.writerow([ "hostname", "ios", "image", "uptime" ])  # add those headers to the csv
         for device_output in data_filenames:
             hostname = re.search(r"show_version_([\S ]+).txt", device_output).group(1)  # grab hostname from filename
-            # and take it
-            # with group()
+            # and take it with group()
+            # print(device_output)
+            # print(hostname)
             with open(device_output) as k:
-                grab_data_from_output = parse_sh_version(k.read())  # call first function to grab data ( expected
-                # result is tuple of elements)
+                # print(k.read())
+                grab_data_from_output = parse_sh_version(device_output)  # call first function to grab data ( expected result is tuple of elements)
+                # print(grab_data_from_output)
                 if grab_data_from_output:
                     write_to_csv_data.writerow((hostname,) + parse_sh_version(device_output))  # concatenate tuple to
                     # tuple ,we are calling first function to get regex match
