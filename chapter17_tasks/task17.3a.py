@@ -5,7 +5,7 @@ show cdp neighbor command output from multiple files and writes
 the resulting topology to a single dictionary.
 The generate_topology_from_cdp function must be created with parameters:
 * list_of_files - list of files from which to read the output of the sh cdp neighbor command
-* save_to_filename is the name of the YAML file where the topology will be saved.
+*  is the name of the YAML file where the topology will be saved.
   * default is None. By default, the topology is not saved to a file.
   * topology is saved only if save_to_filename is file name as argument
 The function should return a dictionary that describes the connections between
@@ -27,6 +27,15 @@ Check the work of the generate_topology_from_cdp function on the list of files:
 Check the operation of the save_to_filename parameter and write the resulting
 dictionary to the topology.yaml file. You will need it in the next task.
 """
+from pprint import pprint
+from task17_3 import parse_sh_cdp_neighbors
+import glob
 
-def generate_topology_from_cdp():
+pprint(parse_sh_cdp_neighbors("sh_cdp_sw1.txt"))
 
+#
+# def generate_topology_from_cdp():
+#
+# if __name__ == "__main__":
+#     sh_cdp_files = glob.glob("sh_cdp*")
+#     print(generate_topology_from_cdp(sh_cdp_files, save_to_filename))
