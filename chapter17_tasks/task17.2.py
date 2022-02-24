@@ -66,6 +66,7 @@ def write_inventory_to_csv(data_filenames, csv_output):
                 if grab_data_from_output:
                     write_to_csv_data.writerow((hostname,) + parse_sh_version(device_output))  # concatenate tuple to
                     # tuple ,we are calling first function to get regex match
+                print(grab_data_from_output)
 
 
 if __name__ == "__main__":
