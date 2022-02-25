@@ -34,16 +34,16 @@ from pprint import pprint
 
 
 def generate_topology_from_cdp(list_of_files, save_to_filename=None):
-    topology = {}
+    dictionary = {}
     for filename in list_of_files:
-        topology.update(parse_sh_cdp_neighbors(filename))
+        dictionary.update(parse_sh_cdp_neighbors(filename))
     if save_to_filename:
         with open(save_to_filename, "w") as f_out:
-            yaml.dump(topology, f_out, default_flow_style=False)
-    return topology
+            yaml.dump(dictionary, f_out, default_flow_style=False)
+    return dictionary
 
 
 if __name__ == "__main__":
-    f_list = glob.glob("sh_cdp*")
-    print(f_list)
-    pprint(generate_topology_from_cdp(f_list, save_to_filename="topology.yaml"))
+    all_configs = glob.glob("sh_cdp*")
+    # print(all_configs)
+    pprint(generate_topology_from_cdp(all_configs, save_to_filename="topology.yaml"))
