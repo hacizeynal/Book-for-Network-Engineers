@@ -30,14 +30,13 @@ dictionary to the topology.yaml file. You will need it in the next task.
 import yaml
 import glob
 from task17_3 import parse_sh_cdp_neighbors
+from pprint import pprint
 
 
 def generate_topology_from_cdp(list_of_files, save_to_filename=None):
     topology = {}
     for filename in list_of_files:
-        print(filename)
-        with open(filename) as f:
-            topology.update(parse_sh_cdp_neighbors(f.read()))
+        topology.update(parse_sh_cdp_neighbors(filename))
     if save_to_filename:
         with open(save_to_filename, "w") as f_out:
             yaml.dump(topology, f_out, default_flow_style=False)
@@ -46,4 +45,5 @@ def generate_topology_from_cdp(list_of_files, save_to_filename=None):
 
 if __name__ == "__main__":
     f_list = glob.glob("sh_cdp*")
-    print(generate_topology_from_cdp(f_list, save_to_filename="topology.yaml"))
+    print(f_list)
+    pprint(generate_topology_from_cdp(f_list, save_to_filename="topology.yaml"))

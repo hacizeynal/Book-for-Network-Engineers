@@ -45,4 +45,4 @@ def parse_sh_cdp_neighbors(cdp_neighbor_txt):
 
 
 if __name__ == "__main__":
-    pprint(parse_sh_cdp_neighbors("sh_cdp_r2.txt"))
+    pprint(parse_sh_cdp_neighbors("sh_cdp_sw1.txt"))
