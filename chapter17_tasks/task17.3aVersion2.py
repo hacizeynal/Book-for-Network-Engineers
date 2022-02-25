@@ -27,23 +27,23 @@ Check the work of the generate_topology_from_cdp function on the list of files:
 Check the operation of the save_to_filename parameter and write the resulting
 dictionary to the topology.yaml file. You will need it in the next task.
 """
-from pprint import pprint
-from task17_3 import parse_sh_cdp_neighbors
 import yaml
 import glob
-
-"""
-First program with single txt file
-"""
+from task17_3 import parse_sh_cdp_neighbors
 
 
-def generate_topology_from_cdp(cdp_output, save_to_filename):
-    with open(save_to_filename,"w") as f:
-        yaml.dump(parse_sh_cdp_neighbors(cdp_output), f, default_flow_style=False)
-    with open('dictionary_to_yaml.yaml') as k:
-        return k.read()
+def generate_topology_from_cdp(list_of_files, save_to_filename=None):
+    topology = {}
+    for filename in list_of_files:
+        print(filename)
+        with open(filename) as f:
+            topology.update(parse_sh_cdp_neighbors(f.read()))
+    if save_to_filename:
+        with open(save_to_filename, "w") as f_out:
+            yaml.dump(topology, f_out, default_flow_style=False)
+    return topology
 
 
 if __name__ == "__main__":
-    sh_cdp_files = glob.glob("sh_cdp*")
-    print(generate_topology_from_cdp("sh_cdp_sw1.txt", "dictionary_to_yaml.yaml"))
+    f_list = glob.glob("sh_cdp*")
+    print(generate_topology_from_cdp(f_list, save_to_filename="topology.yaml"))
