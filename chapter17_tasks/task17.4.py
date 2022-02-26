@@ -29,4 +29,21 @@ The second function, convert_datetime_to_str, does the opposite — it turns
 a datetime object into a string.
 It is not necessary to use the functions convert_str_to_datetime and convert_datetime_to_str
 """
+from pprint import pprint
+import csv
 
+
+def write_last_log_to_csv(source_log, final_output):
+    with open(source_log) as f:
+        reader = csv.reader(f)
+        for row in reader:
+            print(row)
+
+    with open(final_output, "w") as k:
+        writer = csv.writer(k, quoting=csv.QUOTE_NONNUMERIC)
+        for row in writer:
+            writer.writerow(row)
+
+
+if __name__ == "__main__":
+    pprint(write_last_log_to_csv("mail_log.csv", "final_log.csv"))
