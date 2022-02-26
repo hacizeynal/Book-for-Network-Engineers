@@ -41,8 +41,7 @@ def write_last_log_to_csv(source_log, final_output):
 
     with open(final_output, "w") as k:
         writer = csv.writer(k, quoting=csv.QUOTE_NONNUMERIC)
-        for row in writer:
-            writer.writerow(row)
+        writer.writerow([ 'Name', 'Email', 'Last Changed' ])
 
 
 if __name__ == "__main__":
