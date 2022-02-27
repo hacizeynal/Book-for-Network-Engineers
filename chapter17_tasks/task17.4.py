@@ -47,19 +47,22 @@ def convert_str_to_datetime(datetime_str):
 
 def write_last_log_to_csv(source_log, final_output):
     with open(source_log) as f:
-        data = list(csv.reader(f))
-        headers = data[0]
-    send_to_dictionary = {}
-    sorted_by_date = sorted(data [1:], key=lambda x: convert_str_to_datetime(x[2]))
+        data = list(csv.reader(f))  # add everything to list
+        headers = data [ 0 ]  # grab list for header
+    send_to_dictionary = {}  # create empty dictionary
+    sorted_by_date = sorted(data [ 1: ], key=lambda x: convert_str_to_datetime(x [ 2 ]))  # sort the list with help of
+    # lambda function ,at the end list will be sorted based on dates ,since x[2] is taking 3rd index which date
     print(sorted_by_date)
     for name, email, date in sorted_by_date:
-        send_to_dictionary [ email ] = (name, email, date)
+        send_to_dictionary [ email ] = (name, email, date)  # here all data are stored in dictionary ,remember only
+        # last email address will be taken since we will have multiple email address due to multiple username change
+        # and only last one will be taken because it was sorted above based on date function
         print(send_to_dictionary)
     with open(final_output, "w") as final_output:
         writer = csv.writer(final_output)
-        writer.writerow(headers)
-        for row in send_to_dictionary.values():
-            writer.writerow(row)
+        writer.writerow(headers)  # write firstly header to new csv file.
+        for row in send_to_dictionary.values():  # iterate for values in dictionary ,not the keys.
+            writer.writerow(row)  # write tuples to csv
 
 
 if __name__ == "__main__":
