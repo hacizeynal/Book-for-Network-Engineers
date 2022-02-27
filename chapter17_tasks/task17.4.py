@@ -51,6 +51,7 @@ def write_last_log_to_csv(source_log, final_output):
         headers = data[0]
     send_to_dictionary = {}
     sorted_by_date = sorted(data [1:], key=lambda x: convert_str_to_datetime(x[2]))
+    print(sorted_by_date)
     for name, email, date in sorted_by_date:
         send_to_dictionary [ email ] = (name, email, date)
         print(send_to_dictionary)
