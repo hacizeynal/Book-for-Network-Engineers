@@ -31,17 +31,34 @@ It is not necessary to use the functions convert_str_to_datetime and convert_dat
 """
 from pprint import pprint
 import csv
+import datetime
+
+"""
+lambda arguments : expression
+"""
+
+
+def convert_str_to_datetime(datetime_str):
+    """
+    Converts a date string formatted as 11/10/2019 14:05 to a datetime object.
+    """
+    return datetime.datetime.strptime(datetime_str, "%d/%m/%Y %H:%M")
 
 
 def write_last_log_to_csv(source_log, final_output):
     with open(source_log) as f:
-        reader = csv.reader(f)
-        for row in reader:
-            print(row)
-
-    with open(final_output, "w") as k:
-        writer = csv.writer(k, quoting=csv.QUOTE_NONNUMERIC)
-        writer.writerow([ 'Name', 'Email', 'Last Changed' ])
+        data = list(csv.reader(f))
+        headers = data[0]
+    send_to_dictionary = {}
+    sorted_by_date = sorted(data [1:], key=lambda x: convert_str_to_datetime(x[2]))
+    for name, email, date in sorted_by_date:
+        send_to_dictionary [ email ] = (name, email, date)
+        print(send_to_dictionary)
+    with open(final_output, "w") as final_output:
+        writer = csv.writer(final_output)
+        writer.writerow(headers)
+        for row in send_to_dictionary.values():
+            writer.writerow(row)
 
 
 if __name__ == "__main__":
