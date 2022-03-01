@@ -115,7 +115,7 @@ with open('sw2_templates.json', 'w') as m:
 with open("sw2_templates.json") as n:
     print(n.read())
 
-with open("sw3_templates.json","w") as d:
+with open("sw3_templates.json", "w") as d:
     json.dump(to_json,d)
     print(type("sw3_templates.json"))
 
