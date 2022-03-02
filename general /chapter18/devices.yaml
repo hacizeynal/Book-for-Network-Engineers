@@ -1,0 +1,12 @@
+- device_type: cisco_nxos
+  username: king
+  host: 10.48.75.171
+  password: Julien1991
+  secret: cisco
+  timeout: 10
+- device_type: cisco_nxos
+  host: 10.48.75.172
+  username: king
+  password: Julien1991
+  secret: cisco
+  timeout: 10
