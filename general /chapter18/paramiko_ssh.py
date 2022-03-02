@@ -39,7 +39,8 @@ def send_show_command(ip, username, password, command, max_bytes=60000, short_pa
 
 
 if __name__ == "__main__":
-    # devices = [ "10.48.75.171", "10.48.75.172", "10.48.75.173"]
+    devices = [ "10.48.75.171", "10.48.75.172"]
     commands = [ "show ip interface brief", "show vrf","show running-config","show version" ]
-    result = send_show_command("10.48.75.171", "king", "Julien1991", commands)
-    pprint(result, width=120)
+    for connect_to_each_switch in devices:
+        result = send_show_command(connect_to_each_switch, "king", "Julien1991", commands)
+        pprint(result, width=200)
