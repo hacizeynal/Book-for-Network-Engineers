@@ -27,8 +27,10 @@ if __name__ == "__main__":
         devices = yaml.safe_load(i)
         # print(type(devices))
     for device in devices:
-        result = send_show_command(device, [ "show hostname", "show version" ])
-        pprint(result, width=120)
+        result = send_show_command(device, [ "show hostname", "show version " ])
+        for i ,j in result.items():
+            result[i] = j.rstrip("\n")
+        # pprint(result, width=120)
         with open("netmiko_output.txt", "a") as l:
             l.write(json.dumps(result))
 
