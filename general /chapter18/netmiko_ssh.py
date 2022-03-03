@@ -1,4 +1,5 @@
 from pprint import pprint
+import json
 import yaml
 from netmiko import (
     ConnectHandler,
@@ -26,5 +27,9 @@ if __name__ == "__main__":
         devices = yaml.safe_load(i)
         # print(type(devices))
     for device in devices:
-        result = send_show_command(device, [ "sh clock", "show version" ])
+        result = send_show_command(device, [ "show hostname", "show version" ])
         pprint(result, width=120)
+        with open("netmiko_output.txt", "a") as l:
+            l.write(json.dumps(result))
+
+# save pretty output to the txt
