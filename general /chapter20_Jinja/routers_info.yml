@@ -1,0 +1,34 @@
+- id: 11
+  name: Liverpool
+  to_name: LONDON
+  IT: 791
+  BS: 1550
+  to_id: 1
+
+- id: 12
+  name: Bristol
+  to_name: LONDON
+  IT: 793
+  BS: 1510
+  to_id: 1
+
+- id: 14
+  name: Coventry
+  to_name: Manchester
+  IT: 892
+  BS: 1650
+  to_id: 2
+
+- id: 15
+  name: Ordubad
+  to_name: Krakow
+  IT: 1212
+  BS: 1651
+  to_id: 3
+
+- id: 16
+  name: Shaki
+  to_name: Culfa
+  IT: 1278
+  BS: 1600
+  to_id: 4

@@ -1,0 +1,38 @@
+hostname Ordubad
+!
+interface Loopback10
+ description MPLS loopback
+ ip address 10.10.15.1 255.255.255.255
+ !
+interface GigabitEthernet0/0
+ description WAN to Ordubad sw1 G0/1
+!
+interface GigabitEthernet0/0.1151
+ description MPLS to Krakow
+ encapsulation dot1Q 1151
+ ip address 10.15.1.2 255.255.255.252
+ ip ospf network point-to-point
+ ip ospf hello-interval 1
+ ip ospf cost 10
+!
+interface GigabitEthernet0/1
+ description LAN Ordubad to sw1 G0/2 !
+interface GigabitEthernet0/1.1212
+ description PW IT Ordubad - Krakow
+ encapsulation dot1Q 1212
+ xconnect 10.10.3.1 1511 encapsulation mpls
+ backup peer 10.10.3.2 1521
+  backup delay 1 1
+!
+interface GigabitEthernet0/1.1651
+ description PW BS Ordubad - Krakow
+ encapsulation dot1Q 1651
+ xconnect 10.10.3.1 31511 encapsulation mpls
+  backup peer 10.10.3.2 31521
+  backup delay 1 1
+!
+router ospf 10
+ router-id 10.10.15.1
+ auto-cost reference-bandwidth 10000
+ network 10.0.0.0 0.255.255.255 area 0
+ !
