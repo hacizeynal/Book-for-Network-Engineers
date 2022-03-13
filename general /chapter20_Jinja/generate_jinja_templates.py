@@ -15,10 +15,7 @@ env = Environment(
     loader=FileSystemLoader(template_directory),
     trim_blocks=True,
     lstrip_blocks=True)
-
 template = env.get_template(template_file)
-# print(template)
-# print(type(template))
 with open(vars_file) as f:
     vars_dict = yaml.safe_load(f)
     print(vars_dict)
