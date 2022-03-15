@@ -66,4 +66,5 @@ if __name__ == "__main__":
     template_file = "templates/ospf.txt"
     with open(data_file) as f:
         data = yaml.safe_load(f)
+        print(data)
     print(generate_config(template_file, data))

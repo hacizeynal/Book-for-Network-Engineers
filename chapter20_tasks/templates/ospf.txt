@@ -1,0 +1,6 @@
+router ospf {{process}}
+ router-id {{router_id}}
+ auto-cost reference-bandwidth {{ref_bw}}
+ {% for network_area in ospf_intf %}
+ network {{ network_area["ip"] }} area {{ network_area["area"] }}
+ {% endfor %}
