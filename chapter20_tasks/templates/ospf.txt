@@ -3,4 +3,13 @@ router ospf {{process}}
  auto-cost reference-bandwidth {{ref_bw}}
  {% for network_area in ospf_intf %}
  network {{ network_area["ip"] }} area {{ network_area["area"] }}
+ {% if network_area.passive %}
+ passive-interface {{network_area.name}}
+ {% endif %}
+ {% endfor %}
+{% for no_passive in ospf_intf %}
+ {% if not no_passive.passive %}
+ interface {{no_passive.name}}
+  ip ospf hello-interval 1
+ {% endif %}
  {% endfor %}
