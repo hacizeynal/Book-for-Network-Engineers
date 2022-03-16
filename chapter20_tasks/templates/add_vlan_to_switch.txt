@@ -3,11 +3,13 @@ vlan {{vlan_id}}
 
 {% for access_interface in access %}
 interface {{access_interface}}
+ description {{name}}
  switchport mode access
  switchport access vlan {{vlan_id}}
 {% endfor %}
 
 {% for trunk_interface in trunk %}
 interface {{trunk_interface}}
+ description {{name}}
  switchport trunk allowed vlan add {{vlan_id}}
 {% endfor %}
