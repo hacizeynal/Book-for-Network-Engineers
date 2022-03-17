@@ -21,25 +21,4 @@ derived from templates.
 Examples of VPN configurations that the create_vpn_config function
 should return in the cisco_vpn_1.txt and cisco_vpn_2.txt files.
 """
-from general_config_generate_template import generate_config
 
-
-def create_vpn_config(template1, template2, data_dictionary):
-    config_for_vpn1 = generate_config(template1, data_dictionary)
-    config_for_vpn2 = generate_config(template2, data_dictionary)
-    return config_for_vpn1, config_for_vpn2
-
-
-if __name__ == "__main__":
-    template_file_vpn1 = "templates/gre_ipsec_vpn1.txt"
-    template_file_vpn2 = "templates/gre_ipsec_vpn2.txt"
-    data_dict = {
-        "tun_num": 10,
-        "wan_ip_1": "192.168.100.1",
-        "wan_ip_2": "192.168.100.2",
-        "tun_ip_1": "10.0.1.1 255.255.255.252",
-        "tun_ip_2": "10.0.1.2 255.255.255.252",
-    }
-    router_a, router_b = create_vpn_config(template_file_vpn1, template_file_vpn2, data_dict)
-    print(router_a)
-    print(router_b)
