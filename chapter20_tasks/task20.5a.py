@@ -36,12 +36,11 @@ def configure_vpn(src_device_params, dst_device_params, src_template, dst_templa
     with ConnectHandler(**src_device_params) as source_vpn_device, ConnectHandler(
             **dst_device_params) as destination_vpn_device:
         source_vpn_device.enable()
-        source_vpn_device.find_prompt()
         destination_vpn_device.enable()
-        destination_vpn_device.find_prompt()
         first_router_configuration = source_vpn_device.send_command("sh run | include ^interface Tunnel")
+        second_router_configuration = destination_vpn_device.send_command("sh run | include ^interface Tunnel")
+        print(first_router_configuration)
         return first_router_configuration
-        # second_router_configuration = destination_vpn_device.send_command("sh run | include ^interface Tunnel")
 
 
 if __name__ == "__main__":

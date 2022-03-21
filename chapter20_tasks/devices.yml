@@ -1,5 +1,5 @@
 - device_type: cisco_ios
-  host: 10.197.175.8
+  host: 10.197.175.3
   username: king
   password: Julien1991
   secret: cisco
