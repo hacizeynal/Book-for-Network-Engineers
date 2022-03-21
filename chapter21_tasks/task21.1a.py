@@ -13,19 +13,18 @@ output/sh_ip_int_br.txt and the template templates/sh_ip_int_br.template.
 """
 
 import textfsm
-from netmiko import ConnectHandler
-
-final_dict = {}
 
 
 def parse_output_to_dict(template, command_output):
     with open(template) as f:
         parse_with_fsm = textfsm.TextFSM(f)
         header = parse_with_fsm.header
-        print(header)
+        # print(header)
         result = parse_with_fsm.ParseText(command_output)
-        print(result)
-    return [ dict(zip(parse_with_fsm.header, line)) for line in result ]
+        for line in result:
+            print(line)
+        # print(result)
+    return [ dict(zip(parse_with_fsm.header, single_list)) for single_list in result ]  # list comprehension
 
 
 if __name__ == "__main__":
