@@ -1,4 +1,7 @@
 # Python Object-Oriented Programming
+# YouTube Playlist
+# https://www.youtube.com/watch?v=ZDa-Z5JzLYM&list=PL-osiE80TeTsqhIuOqKhwlXsIBIdSeYtc&ab_channel=CoreySchafer
+
 
 class Employee:  # class is like an object constructor, or a "blueprint" for creating objects.
 
@@ -13,7 +16,7 @@ class Employee:  # class is like an object constructor, or a "blueprint" for cre
         self.pay = pay  # attribute of class
         self.email = first.lower() + "." + last.lower() + "@ordubad.com"  # attribute of class
         self.was_born = was_born  # attribute of class
-        Employee.number_of_employees = Employee.number_of_employees + 1 # define
+        Employee.number_of_employees = Employee.number_of_employees + 1
 
     def display_full_name(self):  # this is method/function ,by default self is always taken
         return "{} {}".format(self.first, self.last)
