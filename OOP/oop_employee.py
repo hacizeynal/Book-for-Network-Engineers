@@ -2,7 +2,7 @@
 
 class Employee:  # class is like an object constructor, or a "blueprint" for creating objects.
 
-    number_of_employees = 0
+    number_of_employees = 0 # class attribute aka class variable
     raise_amount = 1.2  # class attribute aka class variable
 
     def __init__(self, first, last, pay,
@@ -13,7 +13,7 @@ class Employee:  # class is like an object constructor, or a "blueprint" for cre
         self.pay = pay  # attribute of class
         self.email = first.lower() + "." + last.lower() + "@ordubad.com"  # attribute of class
         self.was_born = was_born  # attribute of class
-        Employee.number_of_employees = Employee.number_of_employees + 1
+        Employee.number_of_employees = Employee.number_of_employees + 1 # define
 
     def display_full_name(self):  # this is method/function ,by default self is always taken
         return "{} {}".format(self.first, self.last)
