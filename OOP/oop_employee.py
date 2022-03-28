@@ -5,7 +5,7 @@
 
 class Employee:  # class is like an object constructor, or a "blueprint" for creating objects.
 
-    number_of_employees = 0 # class attribute aka class variable
+    number_of_employees = 0  # class attribute aka class variable
     raise_amount = 1.2  # class attribute aka class variable
 
     def __init__(self, first, last, pay,
@@ -25,17 +25,29 @@ class Employee:  # class is like an object constructor, or a "blueprint" for cre
         # self.pay = int(self.pay * Employee.raise_amount)
         self.pay = int(self.pay * self.raise_amount)
 
+    @classmethod  # class method
+    def set_raise_amount(cls, amount):
+        cls.raise_amount = amount
 
-print(Employee.number_of_employees)
 
+# print(Employee.number_of_employees)
+#
 employee1 = Employee("Zeynal", "Hajili", 1000, "Ordubad")  # init method will run automatically to create employee1
 # object ,employee1 will be passed as self to the function and arguments will be taken automatically
 employee2 = Employee("Mamed", "Hajiyev", 2000, "Ordubad")
 employee3 = Employee("Haji", "Hajiyev", 0, "Julfa")
 employee4 = Employee("Huseyn", "Hajiyev", 999, "Baku")
 employee5 = Employee("Bagi", "Mammadov", 0, "Baku")
-employee5.was_born = "Nakchivan" # instance variable
-employee4.pay = 350 # instance variable
-print(employee4.__dict__)
-print(Employee.number_of_employees)
-print(employee5.was_born)
+employee5.raise_amount = 1.3
+# employee5.was_born = "Nakchivan"  # instance variable
+# employee4.pay = 350  # instance variable
+# print(employee4.__dict__)
+# print(Employee.number_of_employees)
+# print(employee5.was_born)
+Employee.set_raise_amount(10)
+print(Employee.raise_amount)
+print(employee5.raise_amount)
+print(employee3.raise_amount)
+print(employee1.raise_amount)
+print(employee2.raise_amount)
+print(employee4.raise_amount)
