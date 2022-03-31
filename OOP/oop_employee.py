@@ -42,12 +42,35 @@ class Employee:  # class is like an object constructor, or a "blueprint" for cre
         return cls(first, last, pay, born)
 
 
-class Developers(Employee):  # child class
-    raise_amount = 1.3
+class Developers(Employee):  # child class ,parent class is Employee
+    raise_amount = 1.7
 
     def __init__(self, first, last, pay, was_born, programming_language):
         super().__init__(first, last, pay, was_born)
         self.programming_language = programming_language
+
+
+class Manager(Employee):  # child class ,parent class is Employee
+    def __init__(self, first, last, pay, was_born, employees=None):
+        super().__init__(first, last, pay, was_born)
+        if employees is None:
+            self.employees = []
+            print("{} does not have any employee :)  ".format(self.first))
+        else:
+            # print("{} has following employee list  ".format(self.first))
+            self.employees = employees
+
+    def add_employee(self, emp):
+        if emp not in self.employees:
+            self.employees.append(emp)
+
+    def remove_employee(self, emp):
+        if emp in self.employees:
+            self.employees.remove(emp)
+
+    def print_employee(self):
+        for emp in self.employees:
+            print(" ---> ", emp.display_full_name())
 
 
 # print(Employee.number_of_employees)
@@ -58,8 +81,10 @@ employee2 = Employee("Mamed", "Hajiyev", 2000, "Ordubad")
 employee3 = Employee("Haji", "Hajiyev", 0, "Julfa")
 employee4 = Employee("Huseyn", "Hajiyev", 999, "Baku")
 employee5 = Employee("Bagi", "Mammadov", 0, "Baku")
-employee1_developers = Developers("John", "Kennedy", 4000, "Orlando","GoLang")
-employee2_developers = Developers("Bark", "Chris", 5000, "California","Ruby")
+dev1= Developers("John", "Kennedy", 4000, "Orlando", "GoLang")
+dev2 = Developers("Bark", "Chris", 5000, "California", "Ruby")
+dev3 = Developers("Toghrul", "Azizli", 14000, "Shaki", "Java")
+dev4 = Developers("Chris", "Cosh", 11000, "California", "C++")
 emp6_string = "Mahmud-Mahmudov-899-Cuba"
 emp7_string = "Kubra-Mahmudova-99-Ganja"
 Employee.write_email_addresses_to_csv(employee5)
@@ -74,9 +99,16 @@ employee6 = Employee.parse_string_create_users(emp6_string)
 # print(employee7.email)
 # print(employee6.first)
 # print(employee7.pay)
-print(employee2_developers.pay)
-print(employee2_developers.apply_raise())
-print(employee2_developers.first)
-print(employee2_developers.pay)
-print(employee2_developers.programming_language)
-print(employee1_developers.programming_language)
+# print(employee2_developers.pay)
+# print(employee2_developers.apply_raise())
+# print(employee2_developers.first)
+# print(employee2_developers.pay)
+# print(employee2_developers.programming_language)
+# print(employee1_developers.programming_language)
+# print(employee4_developers.programming_language)
+# print(employee3_developers.programming_language)
+manager1 = Manager("Damian", "Wrobel", 20000, "Krakow", [ dev1 ])
+manager2 = Manager("Diana", "Nowak", 21000, "Krakow")
+manager1.add_employee(dev3)
+manager1.add_employee(dev2)
+manager1.print_employee()
